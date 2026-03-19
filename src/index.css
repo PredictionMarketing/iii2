@@ -36,9 +36,10 @@
 
     --radius: 0.5rem;
 
-    --hero-bg: 220 30% 6%;
-    --hero-foreground: 220 15% 95%;
-    --hero-muted: 220 15% 60%;
+    /* Light mode: hero sections get a subtle warm off-white */
+    --hero-bg: 220 20% 96%;
+    --hero-foreground: 220 30% 10%;
+    --hero-muted: 220 10% 45%;
 
     --surface: 0 0% 100%;
     --surface-elevated: 220 20% 98%;
@@ -82,6 +83,7 @@
     --input: 220 20% 18%;
     --ring: 220 70% 55%;
 
+    /* Dark mode: hero sections are deep navy */
     --hero-bg: 220 30% 4%;
     --hero-foreground: 220 15% 95%;
     --hero-muted: 220 15% 55%;
