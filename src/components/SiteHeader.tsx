@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "next-themes";
 
 const NAV_LINKS = [
   { label: "Home", path: "/" },
@@ -14,6 +15,7 @@ const CALENDAR_URL = "https://calendly.com/tliantonio";
 const SiteHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { theme, setTheme } = useTheme();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/30 bg-hero/95 backdrop-blur-md">
@@ -39,6 +41,14 @@ const SiteHeader = () => {
               {link.label}
             </Link>
           ))}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 rounded-md text-hero-muted hover:text-hero-foreground transition-colors"
+            aria-label="Toggle theme"
+          >
+            <Sun className="h-4 w-4 hidden dark:block" />
+            <Moon className="h-4 w-4 block dark:hidden" />
+          </button>
           <a
             href={CALENDAR_URL}
             target="_blank"
@@ -83,6 +93,14 @@ const SiteHeader = () => {
                   {link.label}
                 </Link>
               ))}
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="flex items-center gap-2 text-base font-medium text-hero-muted"
+              >
+                <Sun className="h-4 w-4 hidden dark:block" />
+                <Moon className="h-4 w-4 block dark:hidden" />
+                {theme === "dark" ? "Light Mode" : "Dark Mode"}
+              </button>
               <a
                 href={CALENDAR_URL}
                 target="_blank"
@@ -100,3 +118,4 @@ const SiteHeader = () => {
 };
 
 export default SiteHeader;
+

@@ -1,6 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" suppressHydrationWarning>
   <head>
+    <script>
+      // Prevent flash of wrong theme
+      (function() {
+        const t = localStorage.getItem('theme') || 'dark';
+        document.documentElement.classList.toggle('dark', t === 'dark');
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IIInfrastructure — Email That Produces Pipeline</title>

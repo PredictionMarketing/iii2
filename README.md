@@ -1,3 +1,16 @@
-# Welcome to your Lovable project
+# IIInfrastructure Website
 
-TODO: Document your project here
+Email infrastructure that produces pipeline — not just sends.
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
