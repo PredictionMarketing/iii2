@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
+    --background: 220 15% 94%;
     --foreground: 220 30% 10%;
 
     --card: 0 0% 100%;
@@ -36,13 +36,13 @@
 
     --radius: 0.5rem;
 
-    /* Light mode: hero sections get a subtle warm off-white */
-    --hero-bg: 220 20% 96%;
+    /* Light mode: hero sections get a soft warm gray */
+    --hero-bg: 220 15% 92%;
     --hero-foreground: 220 30% 10%;
-    --hero-muted: 220 10% 45%;
+    --hero-muted: 220 10% 42%;
 
-    --surface: 0 0% 100%;
-    --surface-elevated: 220 20% 98%;
+    --surface: 220 15% 97%;
+    --surface-elevated: 220 15% 95%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
