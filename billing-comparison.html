@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Platform Comparison — First Client Onboarding</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0a0e17;
+            color: #e0e6ed;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { color: #8892a4; margin-bottom: 2rem; font-size: 0.95rem; }
+        h2 {
+            font-size: 1.2rem;
+            color: #a78bfa;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(167, 139, 250, 0.2);
+        }
+        h3 { font-size: 1rem; color: #60a5fa; margin: 1.5rem 0 0.8rem 0; }
+
+        /* Requirements box */
+        .req-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+        .req-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(96, 165, 250, 0.15);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+        }
+        .req-card strong { color: #60a5fa; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .req-card p { color: #c8d0dc; font-size: 0.9rem; margin-top: 0.2rem; }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border: 1px solid rgba(96, 165, 250, 0.12);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        thead th {
+            background: rgba(30, 41, 59, 0.8);
+            color: #a78bfa;
+            text-align: left;
+            padding: 0.7rem 1rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(167, 139, 250, 0.2);
+            white-space: nowrap;
+        }
+        tbody td {
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            vertical-align: top;
+        }
+        tbody tr:hover { background: rgba(96, 165, 250, 0.04); }
+        tbody tr:last-child td { border-bottom: none; }
+        .highlight-row { background: rgba(52, 211, 153, 0.06) !important; }
+        .highlight-row td:first-child { font-weight: 700; color: #34d399; }
+
+        /* Winner badge */
+        .winner {
+            display: inline-block;
+            background: linear-gradient(135deg, #34d399, #059669);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 6px;
+            vertical-align: middle;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .skip {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+        .later {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        /* Recommendation box */
+        .rec-box {
+            background: rgba(52, 211, 153, 0.06);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .rec-box h3 { color: #34d399; margin-top: 0; }
+        .rec-box ul { padding-left: 1.2rem; }
+        .rec-box li { margin: 0.3rem 0; color: #c8d0dc; }
+        .rec-box li strong { color: #e0e6ed; }
+
+        /* Action items */
+        .actions {
+            background: rgba(96, 165, 250, 0.06);
+            border: 1px solid rgba(96, 165, 250, 0.15);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .actions h3 { color: #60a5fa; margin-top: 0; }
+        .actions ol { padding-left: 1.2rem; }
+        .actions li { margin: 0.5rem 0; color: #c8d0dc; }
+        .actions a { color: #60a5fa; text-decoration: none; }
+        .actions a:hover { text-decoration: underline; }
+
+        /* Phase box */
+        .phase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        @media (max-width: 700px) { .phase-grid { grid-template-columns: 1fr; } }
+        .phase-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(167, 139, 250, 0.12);
+            border-radius: 10px;
+            padding: 1.2rem;
+        }
+        .phase-card.active { border-color: rgba(52, 211, 153, 0.3); }
+        .phase-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8892a4;
+            margin-bottom: 0.3rem;
+        }
+        .phase-card h4 { color: #e0e6ed; font-size: 1rem; margin-bottom: 0.5rem; }
+        .phase-card p { color: #8892a4; font-size: 0.85rem; }
+
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: #4a5568;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Billing Platform Comparison</h1>
+    <p class="subtitle">First Client Onboarding — ACH-Only, Low/Flat Fee Analysis</p>
+
+    <!-- Requirements -->
+    <div class="req-grid">
+        <div class="req-card">
+            <strong>Payment Method</strong>
+            <p>ACH only (no credit cards)</p>
+        </div>
+        <div class="req-card">
+            <strong>Fee Structure</strong>
+            <p>Low/flat per transaction</p>
+        </div>
+        <div class="req-card">
+            <strong>Invoicing</strong>
+            <p>Professional invoices + auto-billing</p>
+        </div>
+        <div class="req-card">
+            <strong>Complex Billing</strong>
+            <p>Setup + recurring + add-on fees</p>
+        </div>
+    </div>
+
+    <!-- Tier 1 -->
+    <h2>Tier 1 — Right-Sized for First Clients</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Anchor (SayAnchor) <span class="winner">Winner</span></th>
+                    <th>Helcim</th>
+                    <th>Liftoff</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Monthly Fee</td><td><strong>$0</strong></td><td>$0</td><td>$0</td></tr>
+                <tr><td>ACH Fee</td><td><strong>$5 flat per payment</strong></td><td>0.5% + $0.25 (cap $6)</td><td>Flat fee (varies)</td></tr>
+                <tr><td>Invoicing</td><td>✅ Unlimited</td><td>✅</td><td>✅</td></tr>
+                <tr><td>Recurring Billing</td><td>✅ Auto from signed agreement</td><td>✅ Custom plans</td><td>✅</td></tr>
+                <tr><td>Setup / One-Time Fees</td><td>✅ Dynamic pricing</td><td>✅</td><td>✅</td></tr>
+                <tr><td>Add-On Fees (Mid-Cycle)</td><td>✅ Service additions</td><td>⚠️ Manual adjust</td><td>⚠️ Limited</td></tr>
+                <tr><td>Proposals / Agreements</td><td>✅ Built-in (sign + pay)</td><td>❌</td><td>❌</td></tr>
+                <tr><td>QuickBooks Integration</td><td>✅</td><td>✅</td><td>❌</td></tr>
+                <tr><td>Client Portal</td><td>✅</td><td>❌</td><td>❌</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Tier 2 -->
+    <h2>Tier 2 — Enterprise B2B (Scale-Up Options)</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Chargebee <span class="later">Phase 2</span></th>
+                    <th>Maxio <span class="skip">Skip</span></th>
+                    <th>Recurly <span class="skip">Skip</span></th>
+                    <th>LedgerUP <span class="later">Phase 2</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Monthly Fee</td><td>Free → $599/mo</td><td>$599/mo</td><td>$249/mo</td><td>Custom</td></tr>
+                <tr><td>Revenue Tax</td><td>0.75% over cap</td><td>Included</td><td>Volume-based</td><td>Custom</td></tr>
+                <tr><td>ACH Fee</td><td>~0.75% via gateway</td><td>Via gateway</td><td>Via gateway</td><td>Via gateway</td></tr>
+                <tr><td>Complex Billing</td><td>✅ Usage, tiered, hybrid</td><td>✅ Full B2B SaaS</td><td>✅</td><td>✅ Contract-to-revenue</td></tr>
+                <tr><td>AI Features</td><td>✅ Revenue intelligence</td><td>⚠️ Analytics</td><td>⚠️ Churn prediction</td><td>✅ AI automation</td></tr>
+                <tr><td>Revenue Recognition</td><td>✅ ASC 606</td><td>✅ ASC 606</td><td>⚠️ Add-on</td><td>✅</td></tr>
+                <tr><td>Best For</td><td>SaaS at scale</td><td>Finance teams</td><td>Subscriptions</td><td>B2B SaaS automation</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Cost Modeling -->
+    <h2>Cost Modeling — ACH Only</h2>
+
+    <h3>Scenario A: 5 Clients × $3,000/mo = $15,000/mo</h3>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr><th>Platform</th><th>Monthly Fee</th><th>Transaction Cost</th><th>Total / Month</th><th>Annual Cost</th></tr>
+            </thead>
+            <tbody>
+                <tr class="highlight-row"><td>Anchor</td><td>$0</td><td>$5 × 5</td><td><strong>$25</strong></td><td><strong>$300</strong></td></tr>
+                <tr><td>Helcim</td><td>$0</td><td>~$6 × 5</td><td>$30</td><td>$360</td></tr>
+                <tr><td>Stripe</td><td>$0</td><td>0.8% cap $5 × 5</td><td>$25</td><td>$300</td></tr>
+                <tr><td>Chargebee</td><td>$0 (under cap)</td><td>+ gateway fees</td><td>~$50+</td><td>$600+</td></tr>
+                <tr><td>Maxio</td><td>$599</td><td>+ gateway fees</td><td>$620+</td><td>$7,440+</td></tr>
+                <tr><td>Recurly</td><td>$249</td><td>+ gateway fees</td><td>$270+</td><td>$3,240+</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Scenario B: 20 Clients × $5,000/mo = $100,000/mo</h3>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr><th>Platform</th><th>Calculation</th><th>Total / Month</th><th>Annual Cost</th></tr>
+            </thead>
+            <tbody>
+                <tr class="highlight-row"><td>Anchor</td><td>$0 + ($5 × 20)</td><td><strong>$100</strong></td><td><strong>$1,200</strong></td></tr>
+                <tr><td>Helcim</td><td>$0 + (~$6 × 20)</td><td>$120</td><td>$1,440</td></tr>
+                <tr><td>Chargebee</td><td>$0 + 0.75% overage + gateway</td><td>$750+</td><td>$9,000+</td></tr>
+                <tr><td>Maxio</td><td>$599 + gateway</td><td>$700+</td><td>$8,400+</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Recommendation -->
+    <div class="rec-box">
+        <h3>✅ Recommendation: Start with Anchor</h3>
+        <ul>
+            <li><strong>$5 flat per payment</strong> — completely predictable, no surprises</li>
+            <li><strong>$0 monthly</strong> — zero overhead before revenue</li>
+            <li><strong>ACH is free</strong> — the $5 is deducted from the received payment</li>
+            <li><strong>End-to-end flow</strong> — Proposal → Agreement → Payment Info → Auto-billing</li>
+            <li><strong>Mid-cycle add-ons</strong> — add services, change amounts dynamically</li>
+            <li><strong>Client portal</strong> — clients see agreements, invoices, history</li>
+            <li><strong>QuickBooks sync</strong> — auto-reconciliation</li>
+            <li><strong>4-minute setup</strong> — no dev work, no API integration</li>
+        </ul>
+    </div>
+
+    <!-- Phases -->
+    <h2>Growth Path</h2>
+    <div class="phase-grid">
+        <div class="phase-card active">
+            <div class="phase-label">Phase 1 — Now</div>
+            <h4>Anchor (SayAnchor)</h4>
+            <p>First clients through ~50 clients. $5/payment, full invoicing, proposals, ACH auto-collection. Zero monthly cost.</p>
+        </div>
+        <div class="phase-card">
+            <div class="phase-label">Phase 2 — At Scale</div>
+            <h4>Chargebee or LedgerUP</h4>
+            <p>50+ clients. Usage-based billing, ASC 606 revenue recognition, AI forecasting, multi-entity billing.</p>
+        </div>
+    </div>
+
+    <!-- Action Items -->
+    <div class="actions">
+        <h3>🎯 Tommy's Action Items</h3>
+        <ol>
+            <li>Sign up at <a href="https://sayanchor.com" target="_blank">sayanchor.com</a> — free, 4 minutes</li>
+            <li>Create first agreement template — include setup fee + recurring service lines</li>
+            <li>Send to first client — they sign, add ACH info, done</li>
+            <li>Auto-billing starts — Anchor handles invoicing, collection, reconciliation</li>
+            <li>Connect QuickBooks — for auto-reconciliation</li>
+        </ol>
+    </div>
+
+    <div class="footer">
+        Generated 2026-03-27 · Prediction Marketing / AI Standards, Inc.
+    </div>
+
+</body>
+</html>
